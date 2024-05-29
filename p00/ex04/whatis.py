@@ -1,5 +1,6 @@
 from sys import argv
 
+
 def check_even_odd(num):
     num = int(num)
     if num % 2 == 0:
@@ -7,9 +8,10 @@ def check_even_odd(num):
     else:
         print("I'm Odd.")
 
+
 def main():
     if len(argv) > 2:
-        print("AssertionError: more than one argument is provided") 
+        print("AssertionError: more than one argument is provided")
     if len(argv) == 2:
         argument = argv[1]
         try:
@@ -17,7 +19,8 @@ def main():
         except ValueError:
             print("AssertionError: argument is not an integer")
             return
-        check_even_odd(argument)
+        check_even_odd(int_argument)
+
 
 if __name__ == "__main__":
     main()
