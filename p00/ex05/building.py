@@ -36,23 +36,23 @@ def count_chars(text):
 
 def main():
     try:
-        
+
         if len(argv) == 1:
             while True:
                 text = input("What is the text to count?\n")
                 if text:
                     break
-        
+
         elif len(argv) == 2:
             text = argv[1]
-        
+
         else:
             raise AssertionError(": more than one argument is provided")
 
         # Check if the provided argument is an empty string
         while not text:
             text = input("What is the text to count?\n")
-        
+
         counts = count_chars(text)
 
         total_characters = sum(counts.values())
@@ -66,10 +66,10 @@ def main():
     # Handle CTRL+C interruption gracefully
     except KeyboardInterrupt:
         print("\nException: Process interrupted by user.")
-        
+
     except Exception as message:
         print(f"{type(message).__name__}{message}")
-    
+
 
 if __name__ == "__main__":
     main()

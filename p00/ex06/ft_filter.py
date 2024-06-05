@@ -31,18 +31,19 @@ def main():
 
         # Test case 2: Filtering even numbers
         numbers = [1, 2, 3, 4, 5, 6]
-        filtered_numbers_builtin = list(filter(lambda x: x % 2 == 0, numbers))
-        filtered_numbers_custom = list(ft_filter(lambda x: x % 2 == 0, numbers))
-        print(f"return B: {filtered_numbers_builtin}")
-        print(f"return C: {filtered_numbers_custom}")
-        assert filtered_numbers_builtin == filtered_numbers_custom, \
+        filtered_nbrs_builtin = list(filter(lambda x: x % 2 == 0, numbers))
+        filtered_nbrs_custom = list(ft_filter(lambda x: x % 2 == 0, numbers))
+        print(f"return B: {filtered_nbrs_builtin}")
+        print(f"return C: {filtered_nbrs_custom}")
+        assert filtered_nbrs_builtin == filtered_nbrs_custom, \
             "Test case 2 failed"
         print("***Test case 2 passed***")
         print(f"\n***built-in docstring:***\n{filter.__doc__}\n***")
         print(f"\n***my docstring:***{ft_filter.__doc__}***\n")
-  
+
     except Exception as message:
         print(f"{type(message).__name__}{message}")
+
 
 if __name__ == "__main__":
     main()
