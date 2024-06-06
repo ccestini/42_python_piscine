@@ -32,5 +32,6 @@ stdout.write(f"\r{int(percentage)}%|[{bar}]| {progress}/{total}")
 stdout.flush()
 
 to use print i needed to put end='' to prevent the newline default and
-flush to ensure the output is immediately flushed to the terminal.
+flush to ensure the output is immediately flushed to the terminal and
+the :3 is to always to show with 3 chars (so '  1%').
 """
