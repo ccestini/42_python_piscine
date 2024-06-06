@@ -4,16 +4,17 @@ import numpy as np
 def give_bmi(height: list[int | float], weight: list[int | float]) -> list[int | float]:
     """
     Calculates the BMI for a list of heights and weights.
+    Body Mass Index (BMI) is one way to measure body size.
     
     Args:
-    height (list[int | float]): List of heights in meters.
-    weight (list[int | float]): List of weights in kilograms.
+    height (list[int | float]): List of heights.
+    weight (list[int | float]): List of weights.
     
     Returns:
     list[int | float]: List of BMI values.
     """
     if len(height) != len(weight):
-                raise ValueError("Height and weight lists must be of the same size.")
+        raise ValueError("Height and weight lists must be of the same size.")
     if not all(isinstance(h, (int, float)) for h in height):
         raise ValueError("Height list must contain only integers or floats.")
     if not all(isinstance(w, (int, float)) for w in weight):
