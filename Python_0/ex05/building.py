@@ -47,7 +47,7 @@ def main():
             text = argv[1]
 
         else:
-            raise AssertionError(": more than one argument is provided")
+            raise AssertionError("more than one argument is provided")
 
         # Check if the provided argument is an empty string
         while not text:
@@ -68,7 +68,7 @@ def main():
         print("\nException: Process interrupted by user.")
 
     except Exception as message:
-        print(f"{type(message).__name__}{message}")
+        print(f"{type(message).__name__}: {message}")
 
 
 if __name__ == "__main__":

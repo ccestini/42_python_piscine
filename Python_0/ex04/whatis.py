@@ -12,16 +12,17 @@ def check_even_odd(num):
 def main():
     try:
         if len(argv) > 2:
-            raise AssertionError(": more than one argument is provided")
+            raise AssertionError("more than one argument is provided")
         if len(argv) == 2:
             argument = argv[1]
             try:
                 int_argument = int(argument)
             except ValueError:
-                raise AssertionError(": argument is not an integer")
+                raise AssertionError("argument is not an integer")
             check_even_odd(int_argument)
     except Exception as message:
-        print(f"{type(message).__name__}{message}")
+        print(f"{type(message).__name__}: {message}")
+
 
 if __name__ == "__main__":
     main()

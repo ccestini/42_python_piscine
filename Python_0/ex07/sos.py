@@ -40,6 +40,11 @@ def main():
             raise AssertionError(": the arguments are bad")
 
         input_text = str(argv[1])
+
+        if not input_text:  # check if empty
+            raise AssertionError(": the arguments are bad")
+
+        # check if only alpha, numbers and classic space only
         if not all(char.isalnum() or char.isspace() for char in input_text):
             raise AssertionError(": the arguments are bad")
 

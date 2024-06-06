@@ -1,4 +1,4 @@
-"""    This function mimics the built-in filter function. """
+# This function mimics the built-in filter function.
 
 
 def ft_filter(function, iterable):
@@ -14,6 +14,7 @@ is true. If function is None, return the items that are true.
         return (item for item in iterable if function(item))
 
 
+# for test purpouse
 def main():
     """
     Main function to test ft_filter against the built-in filter function.

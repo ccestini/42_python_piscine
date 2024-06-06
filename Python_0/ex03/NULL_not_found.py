@@ -1,7 +1,8 @@
 def NULL_not_found(object: any) -> int:
     if object is None:
         print(f"Nothing: {object} {type(object)}")
-    elif isinstance(object, float) and object != object:  # Check for NaN (Not a Number), condition to check is not equal to itself
+    # Check for NaN (Not a Number), condition to check is not equal to itself
+    elif isinstance(object, float) and object != object:
         print(f"Cheese: {object} {type(object)}")
     elif isinstance(object, bool):
         print(f"Fake: {object} {type(object)}")
