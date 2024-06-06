@@ -11,18 +11,19 @@ def ft_tqdm(lst: range) -> None:
     Returns:
         None.
     """
-    total = len(lst)
+    total = len(lst)  # this is the range ex 333
     progress = 0
-    bar_length = int(2 / 3 * get_terminal_size().columns)
+    bar_length = int(get_terminal_size().columns - 40)
 
     for x in lst:
         progress += 1
         percentage = progress / total * 100
         slices = int(percentage * bar_length / 100)
-        bar = '=' * (slices-2) + '>' + '.' * (bar_length - (slices))
+        bar = '=' * slices + '>' + '.' * (bar_length - slices)
         print(f"\r{int(percentage):3}%|[{bar}]| {progress}/{total}",
               end='', flush=True)
         yield x
+    print()
 
 
 """

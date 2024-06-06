@@ -6,12 +6,12 @@ from Loading import ft_tqdm
 def main():
     try:
 
-        for elem in ft_tqdm(range(333)):
-            sleep(0.005)
+        for elem in ft_tqdm(range(10)):
+            sleep(0.5)
         print()
 
-        for elem in tqdm(range(333)):
-            sleep(0.005)
+        for elem in tqdm(range(10)):
+            sleep(0.5)
         print()
 
     except Exception as message:
