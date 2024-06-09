@@ -18,8 +18,8 @@ def ft_load(path: str) -> np.array:
                 raise ValueError(f"Unsupported image format: {img.format}")
             img_rgb = img.convert('RGB')
             img_array = np.array(img_rgb)
-            print(f"The shape of image is: {img_array.shape}")
             return img_array
+
     except FileNotFoundError:
         raise ValueError(f"File not found: {path}")
     except Exception as e:
