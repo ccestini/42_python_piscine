@@ -45,7 +45,7 @@ def display_image(image: np.array, title: str):
 
 def main():
     try:
-        image = ft_load("animal.jpeg")
+        image = ft_load("../animal.jpeg")
         print(image)
 
         # Convert the image to grayscale
