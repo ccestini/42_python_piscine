@@ -19,7 +19,6 @@ def ft_load(path: str) -> np.array:
             img_rgb = img.convert('RGB')
             img_array = np.array(img_rgb)
             return img_array
-
     except FileNotFoundError:
         raise ValueError(f"File not found: {path}")
     except Exception as e:

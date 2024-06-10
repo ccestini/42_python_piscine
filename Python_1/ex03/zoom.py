@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def zoom_image(image: np.array, x_start: int, x_end: int,
-               y_start: int, y_end: int) -> np.array:
+def ft_zoom_image(image: np.array, x_start: int, x_end: int,
+                  y_start: int, y_end: int) -> np.array:
     """
     Zooms in on a portion of the image in grayscale.
 
@@ -30,7 +30,7 @@ def zoom_image(image: np.array, x_start: int, x_end: int,
         raise ValueError(f"An error occurred during zooming: {e}")
 
 
-def display_image(image: np.array, title: str):
+def ft_display_image(image: np.array, title: str):
     """
     Displays the image with the given title in grayscale.
 
@@ -50,9 +50,9 @@ def main():
         image = ft_load("../animal.jpeg")
         print(image)
 
-        zoomed_image = zoom_image(image, 450, 850, 100, 500)
+        zoomed_image = ft_zoom_image(image, 450, 850, 100, 500)
         print(zoomed_image)
-        display_image(zoomed_image, "Zoomed Image")
+        ft_display_image(zoomed_image, "Zoomed Image")
 
     except Exception as message:
         print(f"{type(message).__name__}: {message}")
