@@ -21,6 +21,7 @@ def zoom_image(image: np.array, x_start: int, x_end: int,
     """
     try:
         zoomed_image = image[y_start:y_end, x_start:x_end]
+        zoomed_image = zoomed_image[..., np.newaxis]
         print(f"The shape of image is: {zoomed_image.shape}")
         return zoomed_image
     except Exception as e:
@@ -54,7 +55,7 @@ def transpose_image(image: np.array) -> np.array:
     transposed = np.zeros((image.shape[1], image.shape[0]), dtype=image.dtype)
     for i in range(image.shape[0]):
         for j in range(image.shape[1]):
-            transposed[j, i] = image[i, j]
+            transposed[j, i] = image[i, j, 0]
     print(f"New shape after Transpose: {transposed.shape}")
     return transposed
 
@@ -72,10 +73,13 @@ def main():
         print(transposed_image)
         display_image(transposed_image, "Transposed Image")
 
+        # print("Testing with transpose builtin")
+        # transpose_builtin = zoomed_image.transpose()
+        # print(transpose_builtin)
+
     except Exception as message:
         print(f"{type(message).__name__}: {message}")
 
 
 if __name__ == "__main__":
     main()
-

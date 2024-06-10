@@ -22,6 +22,8 @@ def zoom_image(image: np.array, x_start: int, x_end: int,
     try:
         zoomed_image = image[y_start:y_end, x_start:x_end]  # slicing row:col
         # Height (y-axis) corresponds to rows and Width (x-axis) to columns
+        zoomed_image = zoomed_image[..., np.newaxis]
+        # from (400,400) to (400, 400, 1) shape
         print(f"New shape after slicing: {zoomed_image.shape}")
         return zoomed_image
     except Exception as e:
