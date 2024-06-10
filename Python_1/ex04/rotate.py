@@ -7,7 +7,7 @@ from PIL import Image
 def zoom_image(image: np.array, x_start: int, x_end: int,
                y_start: int, y_end: int) -> np.array:
     """
-    Zooms in on a portion of the image.
+    Zooms in on a portion of the image in grayscale.
 
     Args:
     image (np.array): The image data.
@@ -20,8 +20,11 @@ def zoom_image(image: np.array, x_start: int, x_end: int,
     np.array: The zoomed-in image data.
     """
     try:
-        zoomed_image = image[y_start:y_end, x_start:x_end]
-        zoomed_image = zoomed_image[..., np.newaxis]
+        zoomed_image = image[y_start:y_end, x_start:x_end, 0:1]
+        # slicing row:col
+        # Height (y-axis) corresponds to rows and Width (x-axis) to columns
+        # Param 0:1, indicates that it is selecting only first channel (red),
+        # it produce an image that resembles a grayscale representation.
         print(f"The shape of image is: {zoomed_image.shape}")
         return zoomed_image
     except Exception as e:
@@ -30,7 +33,7 @@ def zoom_image(image: np.array, x_start: int, x_end: int,
 
 def display_image(image: np.array, title: str):
     """
-    Displays the image with the given title.
+    Displays the image with the given title in grayscale.
 
     Args:
     image (np.array): The image data.
@@ -63,8 +66,6 @@ def transpose_image(image: np.array) -> np.array:
 def main():
     try:
         image = ft_load("../animal.jpeg")
-        image = Image.fromarray(image).convert('L')
-        image = np.array(image)
 
         zoomed_image = zoom_image(image, 450, 850, 100, 500)
         print(zoomed_image)

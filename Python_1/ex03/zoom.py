@@ -1,13 +1,12 @@
 from load_image import ft_load
 import matplotlib.pyplot as plt
 import numpy as np
-from PIL import Image
 
 
 def zoom_image(image: np.array, x_start: int, x_end: int,
                y_start: int, y_end: int) -> np.array:
     """
-    Zooms in on a portion of the image.
+    Zooms in on a portion of the image in grayscale.
 
     Args:
     image (np.array): The image data.
@@ -20,10 +19,11 @@ def zoom_image(image: np.array, x_start: int, x_end: int,
     np.array: The zoomed-in image data.
     """
     try:
-        zoomed_image = image[y_start:y_end, x_start:x_end]  # slicing row:col
+        zoomed_image = image[y_start:y_end, x_start:x_end, 0:1]
+        # slicing row:col
         # Height (y-axis) corresponds to rows and Width (x-axis) to columns
-        zoomed_image = zoomed_image[..., np.newaxis]
-        # from (400,400) to (400, 400, 1) shape
+        # Param 0:1, indicates that it is selecting only first channel (red),
+        # it produce an image that resembles a grayscale representation.
         print(f"New shape after slicing: {zoomed_image.shape}")
         return zoomed_image
     except Exception as e:
@@ -32,7 +32,7 @@ def zoom_image(image: np.array, x_start: int, x_end: int,
 
 def display_image(image: np.array, title: str):
     """
-    Displays the image with the given title.
+    Displays the image with the given title in grayscale.
 
     Args:
     image (np.array): The image data.
@@ -49,10 +49,6 @@ def main():
     try:
         image = ft_load("../animal.jpeg")
         print(image)
-
-        # Convert the image to grayscale
-        image = Image.fromarray(image).convert('L')  # array to image data
-        image = np.array(image)  # back to array after converting to grayscale
 
         zoomed_image = zoom_image(image, 450, 850, 100, 500)
         print(zoomed_image)
