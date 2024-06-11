@@ -22,4 +22,4 @@ def ft_load(path: str) -> np.array:
     except FileNotFoundError:
         raise ValueError(f"File not found: {path}")
     except Exception as e:
-        raise ValueError(f"An error occurred: {e}")
+        raise ValueError(f"An error occurred during loading the image: {e}")

@@ -27,7 +27,7 @@ def ft_zoom_image(image: np.array, x_start: int, x_end: int,
         print(f"The shape of image is: {zoomed_image.shape}")
         return zoomed_image
     except Exception as e:
-        raise ValueError(f"An error occurred during zooming: {e}")
+        raise ValueError(f"Error occurred during zooming: {e}")
 
 
 def ft_display_image(image: np.array, title: str):
@@ -38,10 +38,13 @@ def ft_display_image(image: np.array, title: str):
     image (np.array): The image data.
     title (str): The title of the displayed image.
     """
-    plt.imshow(image, cmap='gray')
-    plt.title(title)
-    plt.axis('on')
-    plt.show()
+    try:
+        plt.imshow(image, cmap='gray')
+        plt.title(title)
+        plt.axis('on')
+        plt.show()
+    except Exception as e:
+        raise ValueError(f"Error occurred during displaying the image: {e}")
 
 
 def ft_transpose_image(image: np.array) -> np.array:
@@ -54,13 +57,16 @@ def ft_transpose_image(image: np.array) -> np.array:
     Returns:
     np.array: The transposed image data.
     """
-    transposed = np.zeros((image.shape[1], image.shape[0]), dtype=int)
-    for i in range(image.shape[0]):
-        for j in range(image.shape[1]):
-            transposed[j, i] = image[i, j, 0]
-            # '0'is to access a single value instead of the entire array
-    print(f"New shape after Transpose: {transposed.shape}")
-    return transposed
+    try:
+        transposed = np.zeros((image.shape[1], image.shape[0]), dtype=int)
+        for i in range(image.shape[0]):
+            for j in range(image.shape[1]):
+                transposed[j, i] = image[i, j, 0]
+                # '0'is to access a single value instead of the entire array
+        print(f"New shape after Transpose: {transposed.shape}")
+        return transposed
+    except Exception as e:
+        raise ValueError(f"Error occurred during transposing the image: {e}")
 
 
 def main():
@@ -69,6 +75,7 @@ def main():
 
         zoomed_image = ft_zoom_image(image, 450, 850, 100, 500)
         print(zoomed_image)
+        print()
 
         transposed_image = ft_transpose_image(zoomed_image)
         print(transposed_image)
