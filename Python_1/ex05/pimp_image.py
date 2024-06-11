@@ -100,6 +100,11 @@ def ft_grey(array: np.array) -> np.array:
     np.array: The color-filtered image array.
     """
     try:
+        # sums the values of the third dimension (axis 2), which corresponds
+        #  to the color channels RGB, then we divided this sum by 3, and
+        # now we have a value inside this only one channel that represents
+        # the represents the intensity of light, with 0 being black, 255 being
+        #  white, and values in between representing various shades of grey.
         sum_array = array.sum(axis=2)
         grey_array = sum_array / 3
         ft_display_image(grey_array, "Grey", "gray")
@@ -109,8 +114,8 @@ def ft_grey(array: np.array) -> np.array:
 
 
 """
-** In typical RGB (Red, Green, Blue) image arrays, the last dimension
-represents the color channels, and their indexes are as follows:
+** In typical RGB (Red, Green, Blue) image arrays [height, width, rgb],
+the last dimension represents the color channels, and their indexes are:
 Index 0: Red channel
 Index 1: Green channel
 Index 2: Blue channel
@@ -119,7 +124,7 @@ Index 2: Blue channel
 intensity values while discarding the intensity values (zero intensity)
 of the other color channels.
 
-** ft_invert: Uses = and - 
+** ft_invert: Uses = and -
 by subtracting each value channel in array RGB from 255 (255 - array).
 
 ** ft_red: Uses =
@@ -128,6 +133,7 @@ by subtracting each value channel in array RGB from 255 (255 - array).
 
 ** ft_blue: Uses = by directly assigning the blue channel values.
 
-ft_grey: Uses = and / by dividing the sum of RGB channels by 3 to calculate the grayscale value for each pixel.
+ft_grey: Uses = and / by dividing the sum of RGB channels by 3 to
+calculate the grayscale value for each pixel.
 
 """
