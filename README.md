@@ -1,3 +1,4 @@
+
 Libraries and packages widely used Python ecosystem:
 
 1. NumPy
@@ -59,3 +60,4 @@ Key Features: A high-level web framework that encourages rapid development and c
 15. SQLAlchemy
 Purpose: Database management
 Key Features: An SQL toolkit and Object-Relational Mapping (ORM) library that facilitates the communication between Python and databases.
+
