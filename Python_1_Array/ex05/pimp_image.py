@@ -101,14 +101,20 @@ def ft_grey(array: np.array) -> np.array:
     """
     try:
         # sums the values of the third dimension (axis 2), which corresponds
-        #  to the color channels RGB, then we divided this sum by 3, and
+        # to the color channels RGB, then we divided this sum by 3, and
         # now we have a value inside this only one channel that represents
         # the represents the intensity of light, with 0 being black, 255 being
-        #  white, and values in between representing various shades of grey.
+        # white, and values in between representing various shades of grey.
         sum_array = array.sum(axis=2)
         grey_array = sum_array / 3
         ft_display_image(grey_array, "Grey", "gray")
         return grey_array
+        """ Easier way, but using +
+        red = array[:,:,0] / 3
+        green = array[:,:,1] / 3
+        blue = array[:,:,2] / 3
+        grey_array = red + green + blue
+        """
     except Exception as e:
         raise ValueError(f"Error during grey filtering the image: {e}")
 
