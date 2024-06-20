@@ -3,9 +3,9 @@ import pandas as pd
 from load_csv import load
 
 
-def plot_life_expectancy(data: pd.DataFrame, country: str):
+def plot_graph_life_expectancy(data: pd.DataFrame, country: str):
     """
-    Plots the life expectancy data for the specified country.
+    Plot a graph with the life expectancy data for the specified country.
 
     Args:
     data (pd.DataFrame): The dataset containing life expectancy information.
@@ -40,7 +40,7 @@ def main():
         test_path = '../life_expectancy_years.csv'
         dataset = load(test_path)
         if dataset is not None:
-            plot_life_expectancy(dataset, 'United Arab Emirates')
+            plot_graph_life_expectancy(dataset, 'United Arab Emirates')
 
     except Exception as e:
         print(f"An error occurred in the main function: {e}")
