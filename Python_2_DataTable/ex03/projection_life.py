@@ -3,7 +3,7 @@ import pandas as pd
 from load_csv import load
 
 
-def plot_projection_life(data_income: pd.DataFrame, data_life: pd.DataFrame):
+def plot_gdp(data_income: pd.DataFrame, data_life: pd.DataFrame, year: int):
     """
     Plots a graph with projection of life expectancy in relation with GDP
     per capita of the year 1900 for each country.
@@ -18,20 +18,22 @@ def plot_projection_life(data_income: pd.DataFrame, data_life: pd.DataFrame):
                 'country' not in data_life.columns:
             raise ValueError("Both datasets must contain 'country' column.")
 
-        # Filter data for the year 1900, creating 2 dataframes
-        income_1900 = data_income[['country', '1900']]
-        life_1900 = data_life[['country', '1900']]
+        year_str = str(year)
+
+        # Filter data for the specified year, creating 2 dataframes
+        income_year = data_income[['country', year_str]].rename(
+            columns={year_str: 'income'})
+        life_year = data_life[['country', year_str]].rename(
+            columns={year_str: 'life'})
 
         # Merge datasets on 'country' to align income and life expectancy data
-        merged_data = pd.merge(income_1900, life_1900, on='country',
-                               suffixes=('_income', '_life'))  # col name
+        merged_data = pd.merge(income_year, life_year, on='country')
 
         # Plotting
-        plt.scatter(merged_data['1900_income'], merged_data['1900_life'],
-                    label='1900')
+        plt.scatter(merged_data['income'], merged_data['life'])
         plt.xscale('log')
         plt.xticks(ticks=[300, 1000, 10000], labels=['300', '1k', '10k'])
-        plt.title('Year 1900')
+        plt.title(f'Year {year}')
         plt.xlabel('Gross Domestic Product')
         plt.ylabel('Life Expectancy')
         plt.show()
@@ -45,9 +47,10 @@ def main():
         income_data = \
           load('../income_per_person_gdppercapita_ppp_inflation_adjusted.csv')
         life_data = load('../life_expectancy_years.csv')
+        year = 1900
 
         if income_data is not None and life_data is not None:
-            plot_projection_life(income_data, life_data)
+            plot_gdp(income_data, life_data, year)
         else:
             print("Failed to load dataset(s).")
 
