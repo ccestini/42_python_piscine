@@ -13,7 +13,7 @@ def plot_gdp(data_income: pd.DataFrame, data_life: pd.DataFrame, year: int):
     data_life (pd.DataFrame): DataFrame containing life expectancy data.
     """
     try:
-        # Ensure each 'country' is a common column in both datasets
+        # Ensure 'country' is a common column in both datasets
         if 'country' not in data_income.columns or \
                 'country' not in data_life.columns:
             raise ValueError("Both datasets must contain 'country' column.")
