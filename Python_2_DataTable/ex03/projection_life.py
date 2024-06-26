@@ -6,11 +6,12 @@ from load_csv import load
 def plot_gdp(data_income: pd.DataFrame, data_life: pd.DataFrame, year: int):
     """
     Plots a graph with projection of life expectancy in relation with GDP
-    per capita of the choosen year for each country.
+    per capita for a given year for each country.
 
     Args:
     data_income (pd.DataFrame): DataFrame containing income per person data.
     data_life (pd.DataFrame): DataFrame containing life expectancy data.
+    year (int): The year for which to plot the data.
     """
     try:
         # Ensure 'country' is a common column in both datasets
