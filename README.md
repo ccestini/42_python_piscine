@@ -62,3 +62,4 @@ Purpose: Database management
 Key Features: An SQL toolkit and Object-Relational Mapping (ORM) library that facilitates the communication between Python and databases.  
 
 Ref: https://realpython.com/
+Ref: https://www.youtube.com/playlist?list=PL-osiE80TeTsqhIuOqKhwlXsIBIdSeYtc

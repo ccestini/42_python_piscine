@@ -15,5 +15,5 @@ def all_thing_is_obj(object: any) -> int:
         else:
             print(f"Unknown string : {type(object)}")
     else:
-        print(f"Type not found")
+        print("Type not found")
     return 42

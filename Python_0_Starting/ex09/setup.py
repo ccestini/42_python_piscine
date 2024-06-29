@@ -6,7 +6,7 @@ setup(
     description='sample package',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url='https://github.com/cc/',  # Ensure this is correct or provide an actual link
+    url='https://github.com/cc/',
     author='cc',
     author_email='cc@42.fr',
     license='MIT',

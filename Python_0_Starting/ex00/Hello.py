@@ -23,8 +23,9 @@ print(ft_dict)
 
 """
 All 4 built-in data types in Python used to store collections of data:
-List items are ordered, changeable, allow duplicate values, and items are indexed.
-Tuple items are ordered, unchangeable, allow duplicate values, and items are indexed.
-Set items are unordered, unchangeable, do not allow duplicate values, and unindexed.
-Dictionary items are ordered, changeable, do not allow duplicates, and  items are presented in key:value pairs
+List: ordered, changeable, allow duplicate values, and items are indexed.
+Tuple: ordered, unchangeable, allow duplicate values, and items are indexed.
+Set: unordered, unchangeable, do not allow duplicate values, and unindexed.
+Dictionary: ordered, changeable, do not allow duplicates,
+ and items are presented in key:value pairs.
 """
