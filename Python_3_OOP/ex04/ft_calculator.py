@@ -34,6 +34,9 @@ class calculator:
  instance state and are purely utility functions that operate only on
  their input arguments.
 
+The dot product, also called scalar product, is a measure of how closely
+ two vectors align, in terms of the directions they point.
+
 zip() function:
 Takes 2 iterables and returns an iterator of tuples.
 Each tuple contains elems from the iterables that are at the same position.
