@@ -46,3 +46,19 @@ def apply_limit(bmi: list[int | float], limit: int) -> list[bool]:
     # return a list by using List Comprehension (concise way to create lists)
     # compares each element in the bmi list with the limit given
     return [elem > limit for elem in bmi]
+
+
+def main():
+    """Main function to test."""
+    try:
+        height = [2.71, 1.15]
+        weight = [165.3, 38.4]
+        bmi = give_bmi(height, weight)
+        print(bmi, type(bmi))
+        print(apply_limit(bmi, 26))
+    except Exception as message:
+        print(f"{type(message).__name__}: {message}")
+
+
+if __name__ == "__main__":
+    main()

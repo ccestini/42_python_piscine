@@ -39,3 +39,15 @@ def ft_load(path: str) -> np.array:
         raise ValueError(f"File not found: {path}")
     except Exception as e:
         raise ValueError(f"An error occurred: {e}")
+
+
+def main():
+    """Main function to test."""
+    try:
+        print(ft_load("../landscape.jpg"))
+    except Exception as message:
+        print(f"{type(message).__name__}: {message}")
+
+
+if __name__ == "__main__":
+    main()
