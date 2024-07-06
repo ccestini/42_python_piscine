@@ -1,7 +1,7 @@
 
 Libraries and packages widely used Python ecosystem:
 
-1. NumPy  
+1. NumPy
 Purpose: Numerical computing  
 Key Features: Provides support for arrays, matrices, and many mathematical functions.  
 
