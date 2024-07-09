@@ -9,7 +9,7 @@ def generate_id() -> str:
 
 @dataclass
 class Student:
-    """Represents a student data."""
+    """Represents student data."""
     name: str
     surname: str
     id: str = field(init=False)
@@ -17,7 +17,13 @@ class Student:
     active: bool = field(init=False, default=True)
 
     def __post_init__(self):
-        self.login = self.name[0] + self.surname
+        # Validate name and surname
+        if not self.name or not self.surname:
+            raise ValueError("Name and surname cannot be empty.")
+        if not self.name.isalpha() or not self.surname.isalpha():
+            raise ValueError("Name/Surname accepts only alphabetic chars.")
+
+        self.login = self.name.upper()[0] + self.surname.lower()
         self.id = generate_id()
 
 
@@ -26,8 +32,8 @@ def main():
     try:
         student = Student(name="Edward", surname="agle")
         print(student)
-
-        student2 = Student(name="Edward", surname="agle")
+        print("---")
+        student2 = Student(name="Edward", surname="agle", id="toto")
         print(student2)
 
     except Exception as msg:
