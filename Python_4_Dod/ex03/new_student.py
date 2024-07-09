@@ -12,9 +12,9 @@ class Student:
     """Represents student data."""
     name: str
     surname: str
-    id: str = field(init=False)
-    login: str = field(init=False)
     active: bool = field(init=False, default=True)
+    login: str = field(init=False)
+    id: str = field(init=False)
 
     def __post_init__(self):
         # Validate name and surname
@@ -42,3 +42,9 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+"""
+The @dataclass decorator in Python simplifies the creation of classes
+ designed to store data by automatically generating methods like
+ __init__ and __repr__.
+"""
