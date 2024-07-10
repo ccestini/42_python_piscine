@@ -17,7 +17,7 @@ def ft_median(data: list[float]) -> float:
         mid1 = sorted_data[(n // 2) - 1]
         mid2 = sorted_data[n // 2]  # // to result int and round down
         median = (mid1 + mid2) / 2
-    return median
+    return int(median)
 
 
 def ft_quartiles(data: list[float]) -> list[float]:
@@ -53,11 +53,13 @@ def ft_statistics(*args: Any, **kwargs: Any) -> None:
         Supported keys: 'mean', 'median', 'quartile', 'std', 'var'.
     """
     try:
-        if not args or not kwargs:  # if any arg passed
-            raise ValueError()
-        data = [float(arg) for arg in args]  # if all numbers
+        data = [float(arg) for arg in args] if args else None
 
-        for calculation in kwargs.values():
+        for key, calculation in kwargs.items():
+            if data is None:
+                print("ERROR")
+                continue
+
             if calculation == 'mean':
                 print(f"mean : {ft_mean(data)}")
             elif calculation == 'median':
@@ -68,10 +70,8 @@ def ft_statistics(*args: Any, **kwargs: Any) -> None:
                 print(f"std : {ft_std_deviation(data)}")
             elif calculation == 'var':
                 print(f"var : {ft_variance(data)}")
-            else:
-                print("ERROR")
 
-    except Exception:  # all expeptions print this
+    except Exception:  # all exceptions print this
         print("ERROR")
 
 
@@ -100,12 +100,21 @@ On the other hand, 'any' is a built-in Python function that returns True
 
 
 def main():
-    ft_statistics(1, 42, 36, 11, 64, 71, 90, 100, x="mean",
-                  y="median", z="quartile", i="std", j="var")
-    print("-----")
-    ft_statistics(x="mean", y="median", z="quartile")
-    print("-----")
-    ft_statistics(2, 4, 6)
+    """Main function to test."""
+    try:
+        ft_statistics(1, 42, 360, 11, 64, toto="mean", tutu="median",
+                      tata="quartile")
+        print("-----")
+        ft_statistics(5, 75, 450, 18, 597, 27474, 48575, hello="std",
+                      world="var")
+        print("-----")
+        ft_statistics(5, 75, 450, 18, 597, 27474, 48575, ejfhhe="heheh",
+                      ejdjdejn="kdekem")
+        print("-----")
+        ft_statistics(toto="mean", tutu="median", tata="quartile")
+
+    except Exception as msg:
+        print(f"An error occurred: {msg}")
 
 
 if __name__ == "__main__":
