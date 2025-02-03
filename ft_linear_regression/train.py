@@ -8,7 +8,15 @@ MODEL_FILE_PATH = './trained_model.txt'
 LEARNING_RATE = 0.1  # Learning rate for gradient descent
 ITERATIONS = 10000  # Number of iterations for gradient descent
 
+
 def load_data(path: str):
+    """
+    Load the dataset from a CSV file.
+    Args:
+        path: The file path to the dataset.
+    Returns:
+        A tuple containing two lists: mileage and price.
+    """
     if not os.path.exists(path):
         raise FileNotFoundError(f"The file {path} was not found.")
     dataset = pd.read_csv(path)
@@ -20,13 +28,32 @@ def load_data(path: str):
         raise ValueError("Dataset is empty.")
     return mileage, price
 
+
 def normalize_data(mileage):
+    """
+    Normalize the mileage data.
+    Args:
+        mileage: List of mileage values.
+    Returns:
+        A tuple containing the normalized mileage list, max mileage, and min mileage.
+    """
     max_mileage = max(mileage)
     min_mileage = min(mileage)
     normalized_mileage = [(m - min_mileage) / (max_mileage - min_mileage) for m in mileage]
     return normalized_mileage, max_mileage, min_mileage
 
+
 def gradient_descent(mileage, price, learning_rate, iterations):
+    """
+    Perform gradient descent to find the optimal parameters.
+    Args:
+        mileage: List of normalized mileage values.
+        price: List of price values.
+        learning_rate: The learning rate for gradient descent.
+        iterations: Number of iterations for gradient descent.
+    Returns:
+        A tuple containing the parameters theta_0 and theta_1.
+    """
     m = len(mileage)
     theta_0, theta_1 = 0, 0
     for _ in range(iterations):
@@ -38,28 +65,54 @@ def gradient_descent(mileage, price, learning_rate, iterations):
         theta_1 -= tmp_theta1
     return theta_0, theta_1
 
+
 def save_model(theta_0, theta_1, max_mileage, min_mileage, path=MODEL_FILE_PATH):
+    """
+    Save the trained model parameters to a file.
+    Args:
+        theta_0: Parameter theta 0.
+        theta_1: Parameter theta 1.
+        max_mileage: Max mileage used for normalization.
+        min_mileage: Min mileage used for normalization.
+        path: The file path to save the model.
+    """
     with open(path, 'w') as file:
         file.write(f"{theta_0}\n{theta_1}\n{max_mileage}\n{min_mileage}\n")
+    print("Train Model: theta 0 and theta 1 saved in trained_model.txt.")
+
 
 def plot(mileage, price, theta_0, theta_1, max_mileage, min_mileage):
-    plt.scatter(mileage, price, color='blue', label='Data points')
+    """
+    Plot the data points and the regression line.
+    Args:
+        mileage: List of mileage values.
+        price: List of price values.
+        theta_0: Parameter theta 0.
+        theta_1: Parameter theta 1.
+        max_mileage: Max mileage used for normalization.
+        min_mileage: Min mileage used for normalization.
+    """
+    plt.scatter(mileage, price, color='blue', label='Actual Prices')
     mileage_normalized = [(m - min_mileage) / (max_mileage - min_mileage) for m in mileage]
     predicted_prices = [theta_0 + theta_1 * m for m in mileage_normalized]
-    plt.plot(mileage, predicted_prices, color='red', label='Custom Regression Line')
+    plt.plot(mileage, predicted_prices, color='red', label='Predicted Prices')
     plt.xlabel('Kilometers')
     plt.ylabel('Price')
     plt.title('Linear Regression: Price vs Kilometers')
     plt.legend()
     plt.show()
 
+
 def main():
-    mileage, price = load_data(DATA_FILE_PATH)
-    mileage_normalized, max_mileage, min_mileage = normalize_data(mileage)
-    theta_0, theta_1 = gradient_descent(mileage_normalized, price, LEARNING_RATE, ITERATIONS)
-    save_model(theta_0, theta_1, max_mileage, min_mileage, MODEL_FILE_PATH)
-    plot(mileage, price, theta_0, theta_1, max_mileage, min_mileage)
+    try:
+        mileage, price = load_data(DATA_FILE_PATH)
+        mileage_normalized, max_mileage, min_mileage = normalize_data(mileage)
+        theta_0, theta_1 = gradient_descent(mileage_normalized, price, LEARNING_RATE, ITERATIONS)
+        save_model(theta_0, theta_1, max_mileage, min_mileage, MODEL_FILE_PATH)
+        plot(mileage, price, theta_0, theta_1, max_mileage, min_mileage)
+    except Exception as e:
+        print(f"Error: {e}")
+
 
 if __name__ == "__main__":
     main()
-    

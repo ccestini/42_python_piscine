@@ -11,21 +11,19 @@ tmp_theta_1=learningRate*1/m ∑_(i=0)^(m-1)▒〖((estimatePrice(mileage[i])- p
 
 * -> PROGRAMS:
 
-- train.py will read the dataset, perform linear regression using the provided gradient descent formulas, and save the learned parameters (theta_0, theta_1).
-1- Read the dataset (CSV file with km and price columns).
-2- Perform linear regression using gradient descent.
-3- Save the trained parameters theta_0 and theta_1 to a file (trained_model.txt).
-4- Use the given formulas for gradient descent updates:
-    tmpθ0 = learningRate * (1/m) * sum((estimatePrice(mileage[i]) - price[i]))
-    tmpθ1 = learningRate * (1/m) * sum(((estimatePrice(mileage[i]) - price[i]) * mileage[i]))
+- train.py will read the dataset, perform linear regression and plot a graph.
+1. Loading and validating the dataset (CSV file with km and price columns).
+2. Normalizing the mileage data to improve gradient descent performance.
+3. Performing linear regression using gradient descent.
+4. Save the trained parameters theta_0 and theta_1 to a file .txt for future use.
+5. Plotting the actual and predicted prices to visualize the model's performance.
 
 - predict.py will prompt the user for a mileage input, calculate the predicted price based on the learned parameters, and print the result.
-1- Prompt for mileage input (ensuring valid input).
-2- Load the trained model parameters: read theta_0 and theta_1 from the trained_model.txt file.
-3- If no trained model is found, the program should assume theta_0 = 0 and theta_1 = 0.
-4- Use the model to predict the price:
-    estimatePrice(mileage) = theta_0 + (theta_1 ∗ mileage)
-5- Display the result/price.
+1. Prompt for mileage input (ensuring valid input).
+2. Load the trained model parameters: read theta_0 and theta_1 from the trained_model.txt file.
+3. If no trained model is found, the program should assume theta_0 = 0 and theta_1 = 0.
+4. Use the model to predict the price.
+5. Display the result/price.
 
 
 * -> LINEAR REGRESSION:
@@ -49,6 +47,7 @@ Gradient descent is an optimization algorithm which is commonly-used to train ma
 https://www.geeksforgeeks.org/gradient-descent-in-linear-regression/
 
 
-* -> DETAILED EXPLANATIONs  
+* -> EXPLANATIONs  
+https://www.youtube.com/watch?v=jc2IthslyzM
 https://medium.com/@leogaudin/ft-linear-regression-an-introduction-guide-to-machine-learning-at-42-4d9a19a260e5
 https://zhang-pascal.fr/ft_linear_regression/

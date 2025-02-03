@@ -1,5 +1,3 @@
-import os
-
 # Constants
 DEFAULT_THETA_0 = 0
 DEFAULT_THETA_1 = 0
@@ -16,20 +14,20 @@ def load_trained_model():
     """
     try:
         with open(MODEL_FILE_PATH, 'r') as file:
-            lines = [line.strip() for line in file.readlines() if line.strip()]  # Ignore empty lines
+            lines = [line.strip() for line in file.readlines() if line.strip()]
             if not lines or len(lines) != 4:
                 raise ValueError("trained_model.txt must contain: theta_0, theta_1, max_mileage, and min_mileage.")
             theta_0 = float(lines[0].strip())
             theta_1 = float(lines[1].strip())
             max_mileage = float(lines[2].strip())
             min_mileage = float(lines[3].strip())
-            if max_mileage <= 0 or min_mileage < 0:
-                raise ValueError("Invalid max_mileage/min_mileage in trained_model.txt.")
+            if max_mileage <= 0 or min_mileage < 0 or max_mileage <= min_mileage:
+                raise ValueError("Invalid max_mileage and/or min_mileage in trained_model.txt.")
             return theta_0, theta_1, max_mileage, min_mileage
     except Exception as e:
         print(f"Error: {e}\nUsing theta_0 = 0 and theta_1 = 0.")
         return DEFAULT_THETA_0, DEFAULT_THETA_1, DEFAULT_MAX_MILEAGE, DEFAULT_MIN_MILEAGE
-    
+
 
 def estimate_price(theta_0, theta_1, mileage, max_mileage, min_mileage):
     """
@@ -43,8 +41,8 @@ def estimate_price(theta_0, theta_1, mileage, max_mileage, min_mileage):
     Return: Estimated price of the car.
     """
     normalized_mileage = (mileage - min_mileage) / (max_mileage - min_mileage)
-    price =  theta_0 + (theta_1 * normalized_mileage)
-    return max(price, 0)   # Ensure the price is not negative
+    price = theta_0 + (theta_1 * normalized_mileage)
+    return max(price, 0)  # Ensure the price is not negative
 
 
 def main():
@@ -57,18 +55,17 @@ def main():
                 break
             mileage = float(mileage_input)
             if mileage < 0:
-                print("Error: Invalid input, use only positive numbers.")
+                print("Error: Invalid Input. Negative mileage is not accepted.")
                 continue
             if mileage > MAX_MILEAGE_THRESHOLD:
-                print(f"If km is greater than {MAX_MILEAGE_THRESHOLD} km, then scrap the car.")
-                break
+                print(f"If km is greater than {MAX_MILEAGE_THRESHOLD} km, then scrap the car!")
+                continue
             predicted_price = estimate_price(theta_0, theta_1, mileage, max_mileage, min_mileage)
-            print(f"Estimated price for a car with {mileage:.2f} km is ${predicted_price:.2f}")
+            print(f"Estimated price for a car with {mileage:.0f} km is ${predicted_price:.2f}")
             break
         except ValueError:
-            print(f"Error: Try again using a valid number between 0 to {MAX_MILEAGE_THRESHOLD} km.")
+            print(f"Error: Invalid Input. Use a valid number between 0 to {MAX_MILEAGE_THRESHOLD} km.")
 
 
 if __name__ == "__main__":
     main()
-    
