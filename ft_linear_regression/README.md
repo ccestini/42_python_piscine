@@ -51,3 +51,7 @@ https://www.geeksforgeeks.org/gradient-descent-in-linear-regression/
 https://www.youtube.com/watch?v=jc2IthslyzM
 https://medium.com/@leogaudin/ft-linear-regression-an-introduction-guide-to-machine-learning-at-42-4d9a19a260e5
 https://zhang-pascal.fr/ft_linear_regression/
+
+
+* -> Why Normalize
+Normalization helps in speeding up the convergence of gradient descent by ensuring that all features are on a similar scale.

@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 DATA_FILE_PATH = './data.csv'
 MODEL_FILE_PATH = './trained_model.txt'
 LEARNING_RATE = 0.1  # Learning rate for gradient descent
-ITERATIONS = 10000  # Number of iterations for gradient descent
+ITERATIONS = 1000  # Number of iterations for gradient descent
 
 
 def load_data(path: str):
@@ -40,6 +40,7 @@ def normalize_data(mileage):
     max_mileage = max(mileage)
     min_mileage = min(mileage)
     normalized_mileage = [(m - min_mileage) / (max_mileage - min_mileage) for m in mileage]
+    print(f"\nData normalized: {normalized_mileage} and qtde of kms normalized = {len(normalized_mileage)}\n")
     return normalized_mileage, max_mileage, min_mileage
 
 
@@ -56,13 +57,16 @@ def gradient_descent(mileage, price, learning_rate, iterations):
     """
     m = len(mileage)
     theta_0, theta_1 = 0, 0
-    for _ in range(iterations):
+    for i in range(iterations):
         estimated_prices = [theta_0 + theta_1 * x for x in mileage]
         error = [estimated_prices[i] - price[i] for i in range(m)]
         tmp_theta0 = learning_rate * sum(error) / m
         tmp_theta1 = learning_rate * sum([error[i] * mileage[i] for i in range(m)]) / m
         theta_0 -= tmp_theta0
         theta_1 -= tmp_theta1
+        # Print first and last 3 values at every iteration for Debug
+        if i < 3 or i >= iterations - 3:
+            print(f"Iteration {i}: theta_0 = {theta_0:.1f}, theta_1 = {theta_1:.1f}, tmp_theta0 = {tmp_theta0:.1f}, tmp_theta1 = {tmp_theta1:.1f}")
     return theta_0, theta_1
 
 
@@ -78,7 +82,7 @@ def save_model(theta_0, theta_1, max_mileage, min_mileage, path=MODEL_FILE_PATH)
     """
     with open(path, 'w') as file:
         file.write(f"{theta_0}\n{theta_1}\n{max_mileage}\n{min_mileage}\n")
-    print("Train Model: theta 0 and theta 1 saved in trained_model.txt.")
+    print("\nModel Ready! Values of theta 0 and theta 1 are saved in trained_model.txt.")
 
 
 def plot(mileage, price, theta_0, theta_1, max_mileage, min_mileage):
