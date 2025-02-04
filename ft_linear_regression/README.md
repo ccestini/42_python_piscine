@@ -60,3 +60,57 @@ The implementation of the cost function in the gradient_descent function is base
 MSE= 1/m  ∑_(i=1)^m▒(h_θ (x^i )-(y^i ))^2 
 MYERROR= 1/m  ∑_(i=1)^m▒(h_θ (x^i )-(y^i )) 
 
+
+* -> MORE USEFULL INFO ABOUT ML
+
+-> Types of Machine Learning
+
+1. Supervised Learning:
+Definition: The algorithm is trained on a labeled dataset, meaning that each training example is paired with an output label.
+Common Algorithms:
+Linear Regression: Used for predicting a continuous outcome.
+Logistic Regression: Used for binary classification problems.
+Decision Trees: Used for both classification and regression tasks.
+Support Vector Machines (SVM): Used for classification tasks.
+Neural Networks: Used for complex tasks such as image and speech recognition.
+Applications: Predicting house prices, spam detection, image classification, medical diagnosis.
+
+2. Unsupervised Learning:
+Definition: The algorithm is used to find patterns in data without pre-existing labels.
+Common Algorithms:
+K-Means Clustering: Used to partition data into clusters.
+Hierarchical Clustering: Builds a hierarchy of clusters.
+Principal Component Analysis (PCA): Used for dimensionality reduction.
+Anomaly Detection: Identifies unusual data points.
+Applications: Customer segmentation, anomaly detection, market basket analysis.
+
+3. Reinforcement Learning:
+Definition: The algorithm learns by interacting with an environment to achieve a goal. It receives rewards or penalties based on actions taken.
+Common Algorithms:
+Q-Learning: A value-based method for learning policies.
+Deep Q-Networks (DQN): Combines Q-learning with deep neural networks.
+Policy Gradient Methods: Directly optimize the policy.
+Applications: Game playing (e.g., AlphaGo), robotics, autonomous driving.
+
+4. Semi-Supervised Learning:
+Definition: Combines a small amount of labeled data with a large amount of unlabeled data during training.
+Applications: Text classification, image classification with limited labeled data.
+
+5. Self-Supervised Learning:
+Definition: A form of unsupervised learning where the data provides the supervision. Often used in natural language processing (NLP).
+Applications: Language modeling, generative models.
+
+-> Frequency of Use for Linear Regression
+Linear Regression is one of the simplest and most interpretable machine learning algorithms. It is widely used for the following reasons:
+Simplicity: Easy to implement and understand.
+Interpretability: The coefficients provide insights into the relationship between features and the target variable.
+Speed: Very efficient for small to medium-sized datasets.
+Common Use Cases:
+Predicting continuous outcomes like prices, sales, or temperatures.
+Analyzing relationships between variables in exploratory data analysis.
+Despite its simplicity, it remains a valuable tool for many practical applications where interpretability and speed are crucial.
+Limitations: Not suitable for capturing complex relationships in the data.
+Assumes a linear relationship between features and the target variable.
+Conclusion
+While linear regression remains a fundamental and widely-used technique in machine learning, it is often complemented or replaced by more advanced algorithms tailored to specific problems. The choice of algorithm depends on the nature of the problem, the data, and the desired outcome.
+
