@@ -55,3 +55,7 @@ https://zhang-pascal.fr/ft_linear_regression/
 
 * -> Why Normalize
 Normalization helps in speeding up the convergence of gradient descent by ensuring that all features are on a similar scale.
+
+* -> Cost Function
+The implementation of the cost function in the gradient_descent function is based on the Mean Squared Error (MSE) as per the formula inside the project subject.
+The MSE is the average of the sum of squared differences between the estimated prices and the actual prices.

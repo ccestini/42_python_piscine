@@ -85,7 +85,7 @@ def save_model(theta_0, theta_1, max_mileage, min_mileage, path=MODEL_FILE_PATH)
     print("\nModel Ready! Values of theta 0 and theta 1 are saved in trained_model.txt.")
 
 
-def plot(mileage, price, theta_0, theta_1, max_mileage, min_mileage):
+def plot(mileage, price, theta_0, theta_1, max_mileage, min_mileage, mileage_normalized):
     """
     Plot the data points and the regression line.
     Args:
@@ -95,10 +95,11 @@ def plot(mileage, price, theta_0, theta_1, max_mileage, min_mileage):
         theta_1: Parameter theta 1.
         max_mileage: Max mileage used for normalization.
         min_mileage: Min mileage used for normalization.
+        mileage_normalized: List of normalized mileage values.
     """
     plt.scatter(mileage, price, color='blue', label='Actual Prices')
-    mileage_normalized = [(m - min_mileage) / (max_mileage - min_mileage) for m in mileage]
     predicted_prices = [theta_0 + theta_1 * m for m in mileage_normalized]
+    print(f"\nPredicted Prices: {predicted_prices}\n")
     plt.plot(mileage, predicted_prices, color='red', label='Predicted Prices')
     plt.xlabel('Kilometers')
     plt.ylabel('Price')
@@ -113,7 +114,7 @@ def main():
         mileage_normalized, max_mileage, min_mileage = normalize_data(mileage)
         theta_0, theta_1 = gradient_descent(mileage_normalized, price, LEARNING_RATE, ITERATIONS)
         save_model(theta_0, theta_1, max_mileage, min_mileage, MODEL_FILE_PATH)
-        plot(mileage, price, theta_0, theta_1, max_mileage, min_mileage)
+        plot(mileage, price, theta_0, theta_1, max_mileage, min_mileage, mileage_normalized)
     except Exception as e:
         print(f"Error: {e}")
 
