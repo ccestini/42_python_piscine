@@ -40,11 +40,11 @@ def normalize_data(mileage):
     max_mileage = max(mileage)
     min_mileage = min(mileage)
     normalized_mileage = [(m - min_mileage) / (max_mileage - min_mileage) for m in mileage]
-    print(f"\nData normalized: {normalized_mileage} and qtde of kms normalized = {len(normalized_mileage)}\n")
+    print(f"\nData normalized: qtde of kms normalized = {len(normalized_mileage)}\n")
     return normalized_mileage, max_mileage, min_mileage
 
 
-def gradient_descent(mileage, price, learning_rate, iterations):
+def gradient_descent(mileage_normalized, price, learning_rate, iterations):
     """
     Perform gradient descent to find the optimal parameters.
     Args:
@@ -55,17 +55,18 @@ def gradient_descent(mileage, price, learning_rate, iterations):
     Returns:
         A tuple containing the parameters theta_0 and theta_1.
     """
-    m = len(mileage)
+    m = len(mileage_normalized)
     theta_0, theta_1 = 0, 0
     for i in range(iterations):
-        estimated_prices = [theta_0 + theta_1 * x for x in mileage]
-        error = [estimated_prices[i] - price[i] for i in range(m)]
-        tmp_theta0 = learning_rate * sum(error) / m
-        tmp_theta1 = learning_rate * sum([error[i] * mileage[i] for i in range(m)]) / m
-        theta_0 -= tmp_theta0
-        theta_1 -= tmp_theta1
+        estimated_prices = [theta_0 + (theta_1 * x) for x in mileage_normalized]
+        error = [estimated_prices[i] - price[i] for i in range(m)]  # Loss function is based on Mean Squared Error (MSE).
+        tmp_theta0 = learning_rate * sum(error) / m  # Calculate the gradient
+        tmp_theta1 = learning_rate * sum([error[i] * mileage_normalized[i] for i in range(m)]) / m
+        # tmp_theta0 represents the amount by which theta_0 should be adjusted to reduce the error.
+        theta_0 -= tmp_theta0  #  theta_0 is adjusted to move in the direction that reduces the error.
+        theta_1 -= tmp_theta1  #  gradients are used to adjust theta_1 until the number of iterations.
         # Print first and last 3 values at every iteration for Debug
-        if i < 3 or i >= iterations - 3:
+        if i < 1 or i >= iterations - 1:
             print(f"Iteration {i}: theta_0 = {theta_0:.1f}, theta_1 = {theta_1:.1f}, tmp_theta0 = {tmp_theta0:.1f}, tmp_theta1 = {tmp_theta1:.1f}")
     return theta_0, theta_1
 
@@ -99,7 +100,7 @@ def plot(mileage, price, theta_0, theta_1, max_mileage, min_mileage, mileage_nor
     """
     plt.scatter(mileage, price, color='blue', label='Actual Prices')
     predicted_prices = [theta_0 + theta_1 * m for m in mileage_normalized]
-    print(f"\nPredicted Prices: {predicted_prices}\n")
+    print(f"\nPredicted Prices: {len(predicted_prices)}\n")
     plt.plot(mileage, predicted_prices, color='red', label='Predicted Prices')
     plt.xlabel('Kilometers')
     plt.ylabel('Price')

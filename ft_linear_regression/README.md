@@ -43,19 +43,20 @@ Linear regression plays an important role in the subfield of artificial intellig
 https://www.ibm.com/think/topics/gradient-descent
 What is gradient descent?
 Gradient descent is an optimization algorithm which is commonly-used to train machine learning models and neural networks. It trains machine learning models by minimizing errors between predicted and actual results.
-
 https://www.geeksforgeeks.org/gradient-descent-in-linear-regression/
 
-
-* -> EXPLANATIONs  
-https://www.youtube.com/watch?v=jc2IthslyzM
-https://medium.com/@leogaudin/ft-linear-regression-an-introduction-guide-to-machine-learning-at-42-4d9a19a260e5
-https://zhang-pascal.fr/ft_linear_regression/
+Gradient Descent Overview
+Gradient descent is an optimization algorithm used to minimize the cost function, in this case, the error between the predicted and actual prices. The goal is to find the optimal values of the parameters 
+theta0 and theta1 that minimize this error.
+Cost Function
+The cost function being minimized in my implementation is based on the Mean Squared Error (MSE), although it simplifies the gradient calculation by not squaring the errors.
 
 
 * -> Why Normalize
 Normalization helps in speeding up the convergence of gradient descent by ensuring that all features are on a similar scale.
 
 * -> Cost Function
-The implementation of the cost function in the gradient_descent function is based on the Mean Squared Error (MSE) as per the formula inside the project subject.
-The MSE is the average of the sum of squared differences between the estimated prices and the actual prices.
+The implementation of the cost function in the gradient_descent function is based on the Mean Squared Error (MSE) principles as per the formula inside the project subject. However it is not exactly the same as the traditional MSE formula. The formula in the subject is not squared.
+MSE= 1/m  ∑_(i=1)^m▒(h_θ (x^i )-(y^i ))^2 
+MYERROR= 1/m  ∑_(i=1)^m▒(h_θ (x^i )-(y^i )) 
+
