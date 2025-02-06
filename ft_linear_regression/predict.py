@@ -1,6 +1,6 @@
 # Constants
 MAX_KM_INPUT = 900000
-MODEL_FILE_PATH = './trained_model.txt'
+MODEL_FILE_PATH = './model.txt'
 
 
 def load_trained_model():
@@ -12,7 +12,7 @@ def load_trained_model():
         with open(MODEL_FILE_PATH, 'r') as file:
             lines = [line.strip() for line in file.readlines() if line.strip()]
             if not lines or len(lines) != 4:
-                raise ValueError("trained_model.txt must contain: theta 0, "
+                raise ValueError("model.txt must contain: theta 0, "
                                  "theta 1, max mileage, and min mileage.")
             theta_0 = float(lines[0].strip())
             theta_1 = float(lines[1].strip())
@@ -21,10 +21,10 @@ def load_trained_model():
             if max_mileage <= 0 or min_mileage < 0 or \
                max_mileage <= min_mileage:
                 raise ValueError("Invalid max_mileage and/or min_mileage in "
-                                 "trained_model.txt.")
+                                 "model.txt.")
             return theta_0, theta_1, max_mileage, min_mileage
     except Exception as e:
-        print(f"Error: {e}\nUsing theta_0 = 0 and theta_1 = 0.")
+        print(f"Error in Model: {e}\nUsing theta_0 = 0 and theta_1 = 0.")
         return 0, 0, 1, 0  # Default values, max km=1 to avoid division by 0
 
 
@@ -70,6 +70,8 @@ def main():
         except ValueError:
             print(f"Error: Invalid Input. Use a valid number between 0 to "
                   f"{MAX_KM_INPUT} km.")
+        except Exception as e:
+            print(f"Error in predicting price: {e}")
 
 
 if __name__ == "__main__":

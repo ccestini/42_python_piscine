@@ -11,19 +11,24 @@ tmp_theta_1=learningRate*1/m ∑_(i=0)^(m-1)▒〖((estimatePrice(mileage[i])- p
 
 * -> PROGRAMS:
 
-- train.py will read the dataset, perform linear regression and plot a graph.
+----- train.py will read the dataset, perform linear regression and plot a graph.
 1. Loading and validating the dataset (CSV file with km and price columns).
 2. Normalizing the mileage data to improve gradient descent performance.
 3. Performing linear regression using gradient descent.
 4. Save the trained parameters theta_0 and theta_1 to a file .txt for future use.
 5. Plotting the actual and predicted prices to visualize the model's performance.
 
-- predict.py will prompt the user for a mileage input, calculate the predicted price based on the learned parameters, and print the result.
+----- predict.py will prompt the user for a mileage input, calculate the predicted price based on the learned parameters, and print the result.
 1. Prompt for mileage input (ensuring valid input).
 2. Load the trained model parameters: read theta_0 and theta_1 from the trained_model.txt file.
 3. If no trained model is found, the program should assume theta_0 = 0 and theta_1 = 0.
 4. Use the model to predict the price.
 5. Display the result/price.
+
+-----precision.py calculates the precision of the price of my model with the actual prices.
+1. Load dataset (actual prices)
+2. Load my trained model (my predict prices)
+3. Calculates the MAE: the average of the absolute differences between the predicted prices and the actual prices in $.
 
 
 * -> LINEAR REGRESSION:

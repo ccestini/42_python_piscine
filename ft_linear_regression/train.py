@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 # Constants
 DATA_FILE_PATH = './data.csv'
-MODEL_FILE_PATH = './trained_model.txt'
+MODEL_FILE_PATH = './model.txt'
 LEARNING_RATE = 0.1  # Learning rate for gradient descent
 ITERATIONS = 1000  # Number of iterations for gradient descent
 
@@ -55,7 +55,7 @@ def gradient_descent(mileage_normalized, price, learning_rate, iterations):
     Returns:
         A tuple containing the parameters theta_0 and theta_1.
     """
-    m = len(mileage_normalized)
+    m = len(mileage_normalized)  # nbr of data points
     theta_0, theta_1 = 0, 0
     for i in range(iterations):
         estimated_prices = [theta_0 + (theta_1 * x) for x in mileage_normalized]
@@ -66,8 +66,9 @@ def gradient_descent(mileage_normalized, price, learning_rate, iterations):
         theta_0 -= tmp_theta0  #  theta_0 is adjusted to move in the direction that reduces the error.
         theta_1 -= tmp_theta1  #  gradients are used to adjust theta_1 until the number of iterations.
         # Print first and last 3 values at every iteration for Debug
-        if i < 1 or i >= iterations - 1:
+        if i < 3 or i >= iterations - 3:
             print(f"Iteration {i}: theta_0 = {theta_0:.1f}, theta_1 = {theta_1:.1f}, tmp_theta0 = {tmp_theta0:.1f}, tmp_theta1 = {tmp_theta1:.1f}")
+            print(f"estimated_prices = {estimated_prices}\n")
     return theta_0, theta_1
 
 
@@ -83,7 +84,7 @@ def save_model(theta_0, theta_1, max_mileage, min_mileage, path=MODEL_FILE_PATH)
     """
     with open(path, 'w') as file:
         file.write(f"{theta_0}\n{theta_1}\n{max_mileage}\n{min_mileage}\n")
-    print("\nModel Ready! Values of theta 0 and theta 1 are saved in trained_model.txt.")
+    print("\nModel Ready! Values of theta 0 and theta 1 are saved in model.txt.")
 
 
 def plot(mileage, price, theta_0, theta_1, max_mileage, min_mileage, mileage_normalized):
@@ -104,7 +105,7 @@ def plot(mileage, price, theta_0, theta_1, max_mileage, min_mileage, mileage_nor
     plt.plot(mileage, predicted_prices, color='red', label='Predicted Prices')
     plt.xlabel('Kilometers')
     plt.ylabel('Price')
-    plt.title('Linear Regression: Price vs Kilometers')
+    plt.title('Linear Regression Model')
     plt.legend()
     plt.show()
 
