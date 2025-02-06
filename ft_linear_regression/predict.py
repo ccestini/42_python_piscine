@@ -2,6 +2,11 @@
 MAX_KM_INPUT = 900000
 MODEL_FILE_PATH = './model.txt'
 
+# Colors
+BLUE = '\033[94m'
+RED = '\033[91m'
+ENDC = '\033[0m'
+
 
 def load_trained_model():
     """
@@ -12,7 +17,7 @@ def load_trained_model():
         with open(MODEL_FILE_PATH, 'r') as file:
             lines = [line.strip() for line in file.readlines() if line.strip()]
             if not lines or len(lines) != 4:
-                raise ValueError("model.txt must contain: theta 0, "
+                raise ValueError("model.txt must contain-> theta 0, "
                                  "theta 1, max mileage, and min mileage.")
             theta_0 = float(lines[0].strip())
             theta_1 = float(lines[1].strip())
@@ -24,7 +29,8 @@ def load_trained_model():
                                  "model.txt.")
             return [theta_0, theta_1, max_mileage, min_mileage]
     except Exception as e:
-        print(f"Error in Model: {e}\nUsing theta_0 = 0 and theta_1 = 0.")
+        print(f"\n{RED}Error in Model:{ENDC} {e}\nUsing theta_0 = 0 "
+              f"and theta_1 = 0.")
         return [0, 0, 1, 0]  # Default values, max km=1 to avoid division by 0
 
 
@@ -49,29 +55,30 @@ def main():
     theta_0, theta_1, max_mileage, min_mileage = load_trained_model()
     while True:
         try:
-            mileage_input = input("Enter the mileage of the car (in km) or "
+            mileage_input = input("\nEnter the mileage of the car (in km) or "
                                   "type 'exit' to quit: ")
             if mileage_input.lower() == 'exit':
-                print("Exiting the program.")
+                print(f"\n{BLUE}Exiting the program.{ENDC}\n")
                 break
             mileage = float(mileage_input)
             if mileage < 0:
-                print("Error: Invalid Input. Negative km is not accepted.")
+                print(f"\n{RED}Error: {ENDC}Invalid Input. "
+                      f"Negative km is not accepted.")
                 continue
             if mileage > MAX_KM_INPUT:
-                print(f"If km is greater than {MAX_KM_INPUT} km, then "
-                      f"scrap the car!")
+                print(f"\n{BLUE}If km is greater than {MAX_KM_INPUT} km, "
+                      f"then scrap the car!{ENDC}")
                 continue
             predicted_price = estimate_price(theta_0, theta_1, mileage,
                                              max_mileage, min_mileage)
-            print(f"Estimated price for a car with {mileage:.0f} km is "
-                  f"${predicted_price:.2f}")
+            print(f"\n{BLUE}Estimated price for a car with {mileage:.0f} "
+                  f"km is $ {predicted_price:.2f}{ENDC}\n")
             break
         except ValueError:
-            print(f"Error: Invalid Input. Use a valid number between 0 to "
-                  f"{MAX_KM_INPUT} km.")
+            print(f"\n{RED}Error: {ENDC}Invalid Input. Use a valid number "
+                  f"between 0 to {MAX_KM_INPUT} km.")
         except Exception as e:
-            print(f"Error in predicting price: {e}")
+            print(f"\n{RED}Error in predicting price: {ENDC}{e}")
 
 
 if __name__ == "__main__":

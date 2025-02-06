@@ -5,6 +5,11 @@ from predict import load_trained_model, estimate_price
 DATA_FILE_PATH = './data.csv'
 MODEL_FILE_PATH = './model.txt'
 
+# Colors
+MAGENTA = '\033[95m'
+RED = '\033[91m'
+ENDC = '\033[0m'
+
 
 def calculate_mae(predictions, targets):
     """
@@ -29,11 +34,11 @@ def main():
         predicted_prices = [estimate_price(theta_0, theta_1, m, max_mileage,
                                            min_mileage) for m in mileage]
         mae = calculate_mae(predicted_prices, actual_prices)
-        print(f"The precision metric using the Mean Absolute Error (MAE): "
-              f"$ {mae:.2f}")
+        print(f"\n{MAGENTA}The precision using the Mean Absolute Error "
+              f"(MAE): $ {mae:.2f} {ENDC}")
 
     except Exception as e:
-        print(f"Error in precision: {e}")
+        print(f"\n{RED}Error in precision: {ENDC}{e}")
 
 
 if __name__ == "__main__":
