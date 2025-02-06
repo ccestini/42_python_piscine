@@ -57,7 +57,7 @@ def gradient_descent(mileage_normalized, price, learning_rate, iterations):
         price: List of price values.
         learning_rate: The learning rate for gradient descent.
         iterations: Number of iterations for gradient descent.
-    Returns:
+    Return:
         A list containing the parameters theta_0 and theta_1.
     """
     m = len(mileage_normalized)
@@ -72,10 +72,10 @@ def gradient_descent(mileage_normalized, price, learning_rate, iterations):
         tmp_theta1 = learning_rate * sum(error_t1) / m
         theta_0 -= tmp_theta0
         theta_1 -= tmp_theta1
-        # if i >= iterations - 3:  # print last 3 iterations
-        #     print(f"Iteration {i}: theta_0 = {theta_0:.1f}, "
-        #           f"theta_1 = {theta_1:.1f}, tmp_theta0 = {tmp_theta0:.1f}, "
-        #           f"tmp_theta1 = {tmp_theta1:.1f}\n")
+        if i >= iterations - 3:  # print last 3 iterations
+            print(f"Iteration {i}: theta_0 = {theta_0:.1f}, "
+                  f"theta_1 = {theta_1:.1f}, tmp_theta0 = {tmp_theta0:.1f}, "
+                  f"tmp_theta1 = {tmp_theta1:.1f}\n")
     return [theta_0, theta_1]
 
 
@@ -91,8 +91,10 @@ def save_model(theta_0, theta_1, max_mileage, min_mileage, path):
     """
     with open(path, 'w') as file:
         file.write(f"{theta_0}\n{theta_1}\n{max_mileage}\n{min_mileage}\n")
-    print(f"\n{BLUE}Model Ready!{ENDC}"
-          f"\nValues of thetas are saved in model.txt.\n")
+    print(f"\n{BLUE}Model Ready!{ENDC}")
+    print(f"{BLUE}----------------------------------------------------{ENDC}")
+    print("Values of theta 0 and theta 1 are saved in model.txt.")
+    print(f"{BLUE}----------------------------------------------------{ENDC}")
 
 
 def plot(mileage, price, theta_0, theta_1, mileage_normalized):
@@ -128,7 +130,7 @@ def main():
                    MODEL_FILE_PATH)
         plot(mileage, price, theta_0, theta_1, mileage_normalized)
     except Exception as e:
-        print(f"\n{RED}Error: {ENDC}{e}\n")
+        print(f"\n{RED}Error: {ENDC}{e}")
 
 
 if __name__ == "__main__":

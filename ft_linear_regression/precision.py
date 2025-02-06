@@ -17,7 +17,7 @@ def calculate_mae(predictions, targets):
     Args:
         predictions: List of predicted values.
         targets: List of actual values.
-    Returns:
+    Return:
         Mean Absolute Error.
     """
     n = len(predictions)
@@ -34,8 +34,15 @@ def main():
         predicted_prices = [estimate_price(theta_0, theta_1, m, max_mileage,
                                            min_mileage) for m in mileage]
         mae = calculate_mae(predicted_prices, actual_prices)
-        print(f"\n{MAGENTA}The precision using the Mean Absolute Error "
-              f"(MAE): $ {mae:.2f} {ENDC}")
+        mean_actual_price = sum(actual_prices) / len(actual_prices)
+        mae_percentage = (mae / mean_actual_price) * 100
+        accuracy = 100 - mae_percentage
+
+        print(f"\n{MAGENTA}Model Evaluation Results:{ENDC}")
+        print(f"{MAGENTA}------------------------------------------{ENDC}")
+        print(f"Mean Absolute Error (MAE): ${mae:.2f}")
+        print(f"Accuracy of the Model: {accuracy:.2f}%")
+        print(f"{MAGENTA}------------------------------------------{ENDC}")
 
     except Exception as e:
         print(f"\n{RED}Error in precision: {ENDC}{e}")

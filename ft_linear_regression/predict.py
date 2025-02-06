@@ -58,7 +58,6 @@ def main():
             mileage_input = input("\nEnter the mileage of the car (in km) or "
                                   "type 'exit' to quit: ")
             if mileage_input.lower() == 'exit':
-                print(f"\n{BLUE}Exiting the program.{ENDC}\n")
                 break
             mileage = float(mileage_input)
             if mileage < 0:
@@ -66,14 +65,18 @@ def main():
                       f"Negative km is not accepted.")
                 continue
             if mileage > MAX_KM_INPUT:
-                print(f"\n{BLUE}If km is greater than {MAX_KM_INPUT} km, "
-                      f"then scrap the car!{ENDC}")
+                print(f"\n{RED}Error:{ENDC} If mileage is greater than "
+                      f"{MAX_KM_INPUT} km, then scrap the car!{ENDC}")
                 continue
+
             predicted_price = estimate_price(theta_0, theta_1, mileage,
                                              max_mileage, min_mileage)
-            print(f"\n{BLUE}Estimated price for a car with {mileage:.0f} "
-                  f"km is $ {predicted_price:.2f}{ENDC}\n")
+            print(f"\n{BLUE}Estimated price for a car")
+            print(f"{BLUE}------------------------------------------{ENDC}")
+            print(f"With {mileage:.0f} km price is $ {predicted_price:.2f}")
+            print(f"{BLUE}------------------------------------------{ENDC}")
             break
+
         except ValueError:
             print(f"\n{RED}Error: {ENDC}Invalid Input. Use a valid number "
                   f"between 0 to {MAX_KM_INPUT} km.")
