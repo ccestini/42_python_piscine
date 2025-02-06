@@ -6,7 +6,7 @@ MODEL_FILE_PATH = './model.txt'
 def load_trained_model():
     """
     Load the trained model parameters from a file.
-    Return: Tuple containing theta_0, theta_1, max_mileage, and min_mileage.
+    Return: List containing theta_0, theta_1, max_mileage, and min_mileage.
     """
     try:
         with open(MODEL_FILE_PATH, 'r') as file:
@@ -22,10 +22,10 @@ def load_trained_model():
                max_mileage <= min_mileage:
                 raise ValueError("Invalid max_mileage and/or min_mileage in "
                                  "model.txt.")
-            return theta_0, theta_1, max_mileage, min_mileage
+            return [theta_0, theta_1, max_mileage, min_mileage]
     except Exception as e:
         print(f"Error in Model: {e}\nUsing theta_0 = 0 and theta_1 = 0.")
-        return 0, 0, 1, 0  # Default values, max km=1 to avoid division by 0
+        return [0, 0, 1, 0]  # Default values, max km=1 to avoid division by 0
 
 
 def estimate_price(theta_0, theta_1, mileage, max_mileage, min_mileage):

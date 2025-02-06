@@ -15,7 +15,7 @@ def load_data(path: str):
     Args:
         path: The file path to the dataset.
     Returns:
-        A tuple containing two lists: mileage and price.
+        A list containing two lists: mileage and price.
     """
     if not os.path.exists(path):
         raise FileNotFoundError(f"The file {path} was not found.")
@@ -26,7 +26,7 @@ def load_data(path: str):
     price = dataset['price'].astype(float).tolist()
     if not mileage or not price:
         raise ValueError("Dataset is empty.")
-    return mileage, price
+    return [mileage, price]
 
 
 def normalize_data(mileage):
@@ -35,13 +35,13 @@ def normalize_data(mileage):
     Args:
         mileage: List of mileage values.
     Returns:
-        A tuple containing the normalized mileage list, max mileage, and min mileage.
+        A list containing the normalized mileage list, max mileage, and min mileage.
     """
     max_mileage = max(mileage)
     min_mileage = min(mileage)
     normalized_mileage = [(m - min_mileage) / (max_mileage - min_mileage) for m in mileage]
     print(f"\nData normalized: qtde of kms normalized = {len(normalized_mileage)}\n")
-    return normalized_mileage, max_mileage, min_mileage
+    return [normalized_mileage, max_mileage, min_mileage]
 
 
 def gradient_descent(mileage_normalized, price, learning_rate, iterations):
@@ -53,7 +53,7 @@ def gradient_descent(mileage_normalized, price, learning_rate, iterations):
         learning_rate: The learning rate for gradient descent.
         iterations: Number of iterations for gradient descent.
     Returns:
-        A tuple containing the parameters theta_0 and theta_1.
+        A list containing the parameters theta_0 and theta_1.
     """
     m = len(mileage_normalized)  # nbr of data points
     theta_0, theta_1 = 0, 0
@@ -69,7 +69,7 @@ def gradient_descent(mileage_normalized, price, learning_rate, iterations):
         if i < 3 or i >= iterations - 3:
             print(f"Iteration {i}: theta_0 = {theta_0:.1f}, theta_1 = {theta_1:.1f}, tmp_theta0 = {tmp_theta0:.1f}, tmp_theta1 = {tmp_theta1:.1f}")
             print(f"estimated_prices = {estimated_prices}\n")
-    return theta_0, theta_1
+    return [theta_0, theta_1]
 
 
 def save_model(theta_0, theta_1, max_mileage, min_mileage, path=MODEL_FILE_PATH):

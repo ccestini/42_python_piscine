@@ -28,8 +28,8 @@ tmp_theta_1=learningRate*1/m ∑_(i=0)^(m-1)▒〖((estimatePrice(mileage[i])- p
 -----precision.py calculates the precision of the price of my model with the actual prices.
 1. Load dataset (actual prices)
 2. Load my trained model (my predict prices)
-3. Calculates the MAE: the average of the absolute differences between the predicted prices and the actual prices in $.
-
+3. Calculates the MAE: the average of the absolute differences between the predicted prices and the actual prices in $. Using a single precision metric, such as Mean Absolute Error (MAE) as is a common and straightforward metric that provides a clear measure of the average magnitude of errors in your predictions.
+MAE=1/n ∑_(i=1)^n▒|predictedPrice[i]-actualPrice[i]| 
 
 * -> LINEAR REGRESSION:
 Linear regression is a data analysis technique that predicts the value of unknown data by using another related and known data value.
@@ -59,6 +59,13 @@ The cost function being minimized in my implementation is based on the Mean Squa
 
 * -> Why Normalize
 Normalization helps in speeding up the convergence of gradient descent by ensuring that all features are on a similar scale.
+I used Min-Max Normalization
+Scale Consistency:
+Purpose: Min-max normalization scales the mileage data to a range of [0, 1].
+Benefit: This ensures that all features contribute equally to the model training, avoiding dominance by features with larger scales.
+Gradient Descent Efficiency:
+Purpose: Gradient descent algorithms converge faster when the input features are normalized.
+Benefit: Normalized data helps in achieving a more stable and efficient optimization process, leading to faster convergence.
 
 * -> Cost Function
 The implementation of the cost function in the gradient_descent function is based on the Mean Squared Error (MSE) principles as per the formula inside the project subject. However it is not exactly the same as the traditional MSE formula. The formula in the subject is not squared.
