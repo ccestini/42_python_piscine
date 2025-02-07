@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # Constants
 DATA_FILE_PATH = './data.csv'
 MODEL_FILE_PATH = './model.txt'
-LEARNING_RATE = 0.1
+LEARNING_RATE = 0.15
 ITERATIONS = 1000
 
 # Colors
@@ -60,7 +60,7 @@ def gradient_descent(mileage_normalized, price, learning_rate, iterations):
     Return:
         A list containing the parameters theta_0 and theta_1.
     """
-    m = len(mileage_normalized)
+    m = len(mileage_normalized)  # Number of data points
     theta_0, theta_1 = 0, 0
     for i in range(iterations):
         estimated_prices = [theta_0 + (theta_1 * x)
@@ -68,14 +68,14 @@ def gradient_descent(mileage_normalized, price, learning_rate, iterations):
         error_t0 = [estimated_prices[i] - price[i] for i in range(m)]
         error_t1 = [(estimated_prices[i] - price[i]) * mileage_normalized[i]
                     for i in range(m)]
-        tmp_theta0 = learning_rate * sum(error_t0) / m
+        tmp_theta0 = learning_rate * sum(error_t0) / m  # Gradient for theta
         tmp_theta1 = learning_rate * sum(error_t1) / m
-        theta_0 -= tmp_theta0
+        theta_0 -= tmp_theta0  # Updating params
         theta_1 -= tmp_theta1
-        if i >= iterations - 3:  # print last 3 iterations
-            print(f"Iteration {i}: theta_0 = {theta_0:.1f}, "
-                  f"theta_1 = {theta_1:.1f}, tmp_theta0 = {tmp_theta0:.1f}, "
-                  f"tmp_theta1 = {tmp_theta1:.1f}\n")
+        # if i >= iterations - 3:  # print last 3 iterations
+        #     print(f"Iteration {i}: theta_0 = {theta_0:.1f}, "
+        #           f"theta_1 = {theta_1:.1f}, tmp_theta0 = {tmp_theta0:.1f}, "
+        #           f"tmp_theta1 = {tmp_theta1:.1f}\n")
     return [theta_0, theta_1]
 
 
@@ -94,6 +94,10 @@ def save_model(theta_0, theta_1, max_mileage, min_mileage, path):
     print(f"\n{BLUE}Model Ready!{ENDC}")
     print(f"{BLUE}----------------------------------------------------{ENDC}")
     print("Values of theta 0 and theta 1 are saved in model.txt.")
+    # Show the change in price per km
+    change_in_price_per_km = theta_1 / (max_mileage - min_mileage)
+    print(f"If the car is new: $ {theta_0:.2f}")
+    print(f"Change in Price per KM: $ {change_in_price_per_km:.5f}")
     print(f"{BLUE}----------------------------------------------------{ENDC}")
 
 
