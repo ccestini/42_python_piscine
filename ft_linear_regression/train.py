@@ -9,7 +9,7 @@ LEARNING_RATE = 0.15
 ITERATIONS = 800
 
 # Colors
-BLUE = '\033[94m'
+BLUE = '\033[96m'
 RED = '\033[91m'
 ENDC = '\033[0m'
 
