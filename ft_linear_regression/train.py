@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 # Constants
 DATA_FILE_PATH = './data.csv'
 MODEL_FILE_PATH = './model.txt'
-LEARNING_RATE = 0.15
-ITERATIONS = 800
+LEARNING_RATE = 0.12
+ITERATIONS = 1000
 
 # Colors
 BLUE = '\033[96m'
@@ -44,7 +44,7 @@ def normalize_data(mileage):
     """
     max_mileage = max(mileage)
     min_mileage = min(mileage)
-    if max_mileage <= 0 or min_mileage < 0 or max_mileage <= min_mileage:
+    if max_mileage <= 0 or min_mileage < 0 or max_mileage == min_mileage:
         raise ValueError("Invalid max and/or min mileage in dataset.")
     normalized_mileage = [(m - min_mileage) / (max_mileage - min_mileage)
                           for m in mileage]
@@ -74,10 +74,10 @@ def gradient_descent(mileage_normalized, price, learning_rate, iterations):
         tmp_theta1 = learning_rate * sum(error_t1) / m
         theta_0 -= tmp_theta0  # Updating params
         theta_1 -= tmp_theta1
-        # if i >= iterations - 3:  # print last 3 iterations
-        #     print(f"Iteration {i}: theta_0 = {theta_0:.1f}, "
-        #           f"theta_1 = {theta_1:.1f}, tmp_theta0 = {tmp_theta0:.1f}, "
-        #           f"tmp_theta1 = {tmp_theta1:.1f}\n")
+        if i >= iterations - 3:  # print last 3 iterations
+            print(f"Iteration {i}: theta_0 = {theta_0:.1f}, "
+                  f"theta_1 = {theta_1:.1f}, tmp_theta0 = {tmp_theta0:.1f}, "
+                  f"tmp_theta1 = {tmp_theta1:.1f}\n")
     return [theta_0, theta_1]
 
 

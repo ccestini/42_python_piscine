@@ -18,8 +18,7 @@ def load_trained_model():
         with open(MODEL_FILE_PATH, 'r') as file:
             lines = [line.strip() for line in file.readlines() if line.strip()]
             if not lines or len(lines) != 2:
-                raise ValueError("model.txt must contain-> theta 0, "
-                                 "theta 1, max mileage, and min mileage.")
+                raise ValueError("model.txt must contain-> theta 0, theta 1")
             theta_0 = float(lines[0].strip())
             theta_1 = float(lines[1].strip())
             return [theta_0, theta_1]
