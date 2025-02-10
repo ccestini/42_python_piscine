@@ -37,8 +37,6 @@ def estimate_price(theta_0, theta_1, mileage):
         theta_0: Intercept of the regression model.
         theta_1: Slope of the regression model.
         mileage: Mileage of the car.
-        max_mileage: Maximum mileage used for normalization.
-        min_mileage: Minimum mileage used for normalization.
     Return: Estimated price of the car.
     """
     price = theta_0 + (theta_1 * mileage)

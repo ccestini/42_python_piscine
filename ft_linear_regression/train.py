@@ -111,8 +111,6 @@ def plot(mileage, price, theta_0, theta_1, mileage_normalized):
         price: List of price values.
         theta_0: Calculated parameter theta 0.
         theta_1: Calculated parameter theta 1.
-        max_mileage: Max mileage in dataset.
-        min_mileage: Min mileage in dataset.
         mileage_normalized: List of normalized mileage values.
     """
     plt.scatter(mileage, price, color='blue', label='Actual Prices')
