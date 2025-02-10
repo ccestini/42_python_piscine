@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 DATA_FILE_PATH = './data.csv'
 MODEL_FILE_PATH = './model.txt'
 LEARNING_RATE = 0.15
-ITERATIONS = 1000
+ITERATIONS = 800
 
 # Colors
 BLUE = '\033[94m'
@@ -44,6 +44,8 @@ def normalize_data(mileage):
     """
     max_mileage = max(mileage)
     min_mileage = min(mileage)
+    if max_mileage <= 0 or min_mileage < 0 or max_mileage <= min_mileage:
+        raise ValueError("Invalid max and/or min mileage in dataset.")
     normalized_mileage = [(m - min_mileage) / (max_mileage - min_mileage)
                           for m in mileage]
     return [normalized_mileage, max_mileage, min_mileage]
@@ -89,15 +91,15 @@ def save_model(theta_0, theta_1, max_mileage, min_mileage, path):
         min_mileage: Min mileage in dataset used for normalization.
         path: The file path to save the model.
     """
+    theta_1 = theta_1 / (max_mileage - min_mileage)  # Price per km
     with open(path, 'w') as file:
-        file.write(f"{theta_0}\n{theta_1}\n{max_mileage}\n{min_mileage}\n")
+        file.write(f"{theta_0}\n{theta_1}\n")
     print(f"\n{BLUE}Model Ready!{ENDC}")
     print(f"{BLUE}----------------------------------------------------{ENDC}")
     print("Values of theta 0 and theta 1 are saved in model.txt.")
     # Show the change in price per km
-    change_in_price_per_km = theta_1 / (max_mileage - min_mileage)
     print(f"If the car is new: $ {theta_0:.2f}")
-    print(f"Change in Price per KM: $ {change_in_price_per_km:.5f}")
+    print(f"Change in Price per KM: $ {theta_1:.5f}")
     print(f"{BLUE}----------------------------------------------------{ENDC}")
 
 

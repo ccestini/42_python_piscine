@@ -28,11 +28,11 @@ def calculate_mae(predictions, targets):
 def main():
     try:
         mileage, actual_prices = load_data(DATA_FILE_PATH)
-        theta_0, theta_1, max_mileage, min_mileage = load_trained_model()
+        theta_0, theta_1 = load_trained_model()
         if not theta_0 and not theta_1:
             raise ValueError("Model not found. Please train the model first.")
-        predicted_prices = [estimate_price(theta_0, theta_1, m, max_mileage,
-                                           min_mileage) for m in mileage]
+        predicted_prices = [estimate_price(theta_0, theta_1, m)
+                            for m in mileage]
         mae = calculate_mae(predicted_prices, actual_prices)
         mean_actual_price = sum(actual_prices) / len(actual_prices)
         mae_percentage = (mae / mean_actual_price) * 100
