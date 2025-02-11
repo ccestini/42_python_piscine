@@ -37,7 +37,8 @@ def estimate_price(theta_0, theta_1, mileage):
         theta_0: Intercept of the regression model.
         theta_1: Slope of the regression model.
         mileage: Mileage of the car.
-    Return: Estimated price of the car.
+    Return: 
+        Estimated price of the car.
     """
     price = theta_0 + (theta_1 * mileage)
     return max(price, 0)  # Ensure the price is not negative
