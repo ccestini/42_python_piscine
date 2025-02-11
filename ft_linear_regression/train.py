@@ -91,7 +91,7 @@ def save_model(theta_0, theta_1, max_mileage, min_mileage, path):
         min_mileage: Min mileage in dataset used for normalization.
         path: The file path to save the model.
     Return:
-        theta 0 and theta 1 adjusted per km.
+        List of adjusted theta 0 and theta 1 per km.
     """
     # Denormalize theta1
     theta_1 = theta_1 / (max_mileage - min_mileage)
@@ -105,7 +105,7 @@ def save_model(theta_0, theta_1, max_mileage, min_mileage, path):
     print(f"If the car is new: $ {theta_0:.2f}")
     print(f"Change in Price per KM: $ {theta_1:.5f}")
     print(f"{BLUE}----------------------------------------------------{ENDC}")
-    return (theta_0, theta_1)
+    return [theta_0, theta_1]
 
 
 def plot(mileages, prices, theta_0, theta_1):

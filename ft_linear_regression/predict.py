@@ -12,7 +12,8 @@ ENDC = '\033[0m'
 def load_trained_model():
     """
     Load the trained model parameters from a file.
-    Return: List containing theta_0 and theta_1.
+    Return: 
+        List containing theta_0 and theta_1.
     """
     try:
         with open(MODEL_FILE_PATH, 'r') as file:
