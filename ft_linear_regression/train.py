@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # Constants
 DATA_FILE_PATH = './data.csv'
 MODEL_FILE_PATH = './model.txt'
-LEARNING_RATE = 0.12
+LEARNING_RATE = 0.1
 ITERATIONS = 1000
 
 # Colors
@@ -90,20 +90,25 @@ def save_model(theta_0, theta_1, max_mileage, min_mileage, path):
         max_mileage: Max mileage in dataset used for normalization.
         min_mileage: Min mileage in dataset used for normalization.
         path: The file path to save the model.
+    Return:
+        theta 0 and theta 1 adjusted per km.
     """
-    theta_1 = theta_1 / (max_mileage - min_mileage)  # Price per km
+    # Denormalize theta1
+    theta_1 = theta_1 / (max_mileage - min_mileage)
+    # Adjust theta0 to fit the denormalized scale
+    theta_0 = theta_0 - (theta_1 * min_mileage)
     with open(path, 'w') as file:
         file.write(f"{theta_0}\n{theta_1}\n")
     print(f"\n{BLUE}Model Ready!{ENDC}")
     print(f"{BLUE}----------------------------------------------------{ENDC}")
     print("Values of theta 0 and theta 1 are saved in model.txt.")
-    # Show the change in price per km
     print(f"If the car is new: $ {theta_0:.2f}")
     print(f"Change in Price per KM: $ {theta_1:.5f}")
     print(f"{BLUE}----------------------------------------------------{ENDC}")
+    return (theta_0, theta_1)
 
 
-def plot(mileage, price, theta_0, theta_1, mileage_normalized):
+def plot(mileages, prices, theta_0, theta_1):
     """
     Plot the data points and the regression line.
     Args:
@@ -111,11 +116,10 @@ def plot(mileage, price, theta_0, theta_1, mileage_normalized):
         price: List of price values.
         theta_0: Calculated parameter theta 0.
         theta_1: Calculated parameter theta 1.
-        mileage_normalized: List of normalized mileage values.
     """
-    plt.scatter(mileage, price, color='blue', label='Actual Prices')
-    predicted_prices = [theta_0 + theta_1 * m for m in mileage_normalized]
-    plt.plot(mileage, predicted_prices, color='magenta',
+    plt.scatter(mileages, prices, color='blue', label='Actual Prices')
+    predicted_prices = [theta_0 + theta_1 * m for m in mileages]
+    plt.plot(mileages, predicted_prices, color='magenta',
              label='Predicted Prices')
     plt.xlabel('Kilometers')
     plt.ylabel('Price')
@@ -126,13 +130,13 @@ def plot(mileage, price, theta_0, theta_1, mileage_normalized):
 
 def main():
     try:
-        mileage, price = load_data(DATA_FILE_PATH)
-        mileage_normalized, max_mileage, min_mileage = normalize_data(mileage)
-        theta_0, theta_1 = gradient_descent(mileage_normalized, price,
+        mileages, prices = load_data(DATA_FILE_PATH)
+        mileage_normalized, max_mileage, min_mileage = normalize_data(mileages)
+        theta_0, theta_1 = gradient_descent(mileage_normalized, prices,
                                             LEARNING_RATE, ITERATIONS)
-        save_model(theta_0, theta_1, max_mileage, min_mileage,
-                   MODEL_FILE_PATH)
-        plot(mileage, price, theta_0, theta_1, mileage_normalized)
+        theta0_km, theta1_km = save_model(theta_0, theta_1, max_mileage,
+                                          min_mileage, MODEL_FILE_PATH)
+        plot(mileages, prices, theta0_km, theta1_km)
     except Exception as e:
         print(f"\n{RED}Error: {ENDC}{e}")
 
